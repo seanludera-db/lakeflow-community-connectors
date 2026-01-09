@@ -1,0 +1,40 @@
+# Smartsheet Community Connector Spec
+# This file defines the specification for the connector including
+# connection parameters and allowlist options.
+
+# ============================================================================
+# Connection Parameters
+# These are provided when creating the Unity Catalog connection.
+#
+# This connector uses a single authentication method (API access token).
+# ============================================================================
+connection:
+  parameters:
+    - name: access_token
+      type: string
+      required: true
+      description: >
+        Smartsheet API access token for authentication. Generate from
+        Smartsheet Personal Settings > API Access.
+
+    - name: region
+      type: string
+      required: false
+      description: >
+        Smartsheet regional deployment. One of: 'default' (US), 'gov' (Government),
+        'eu' (Europe), 'au' (Australia). Defaults to 'default' if not specified.
+
+    - name: base_url
+      type: string
+      required: false
+      description: >
+        Custom base URL for the Smartsheet API. Overrides 'region' if provided.
+        Example: https://api.smartsheet.com/2.0
+
+# ============================================================================
+# External Options Allowlist
+# These table-specific options must be included in the externalOptionsAllowList
+# parameter of the UC connection to allow them to be passed through.
+# ============================================================================
+external_options_allowlist: "include_attachments,include_discussions,expand_rows"
+
